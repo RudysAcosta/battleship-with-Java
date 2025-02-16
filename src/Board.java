@@ -30,7 +30,33 @@ public class Board {
             }
             System.out.println();
         }
+    }
 
+    public boolean isValidCoordinate(String startCoordinate, String endCoordinate) {
+
+        int[] startNormalize  = normalizeCoordinate(startCoordinate);
+        int[] endNormalize  = normalizeCoordinate(endCoordinate);
+
+        return isValidCoordinate(startCoordinate) && isValidCoordinate(endCoordinate) && startNormalize[1] == endNormalize[1];
+    }
+
+    public boolean isValidCoordinate(String coordinate) {
+        int[] normalizeCoordinate = normalizeCoordinate(coordinate);
+
+        return normalizeCoordinate[0] > 0 && normalizeCoordinate[0] <= this.dimantion
+                && normalizeCoordinate[1] > 0 && normalizeCoordinate[1] <= this.dimantion;
+    }
+
+    public int[] normalizeCoordinate(String coordinate) {
+        String[] position = new String[2];
+
+        position[0] = coordinate.substring(0, 1);
+        position[1] = coordinate.substring(1);
+
+        int y = position[0].charAt(0) - 64;
+        int x = Integer.parseInt(position[1]);
+
+        return new int[]{x, y};
     }
 
 }
