@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Board {
 
     private final int dimantion = 10;
@@ -37,7 +39,11 @@ public class Board {
         int[] startNormalize  = normalizeCoordinate(startCoordinate);
         int[] endNormalize  = normalizeCoordinate(endCoordinate);
 
-        return isValidCoordinate(startCoordinate) && isValidCoordinate(endCoordinate) && startNormalize[1] == endNormalize[1];
+        if (startNormalize[0] != endNormalize[0] && startNormalize[1] != endNormalize[1]) {
+            return false;
+        }
+
+        return isValidCoordinate(startCoordinate) && isValidCoordinate(endCoordinate);
     }
 
     public boolean isValidCoordinate(String coordinate) {
