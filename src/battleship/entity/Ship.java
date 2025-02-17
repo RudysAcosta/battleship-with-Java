@@ -1,4 +1,4 @@
-package entity;
+package battleship.entity;
 
 import java.util.ArrayList;
 import java.util.List;

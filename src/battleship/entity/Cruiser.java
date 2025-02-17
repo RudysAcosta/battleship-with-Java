@@ -1,4 +1,4 @@
-package entity;
+package battleship.entity;
 
 public class Cruiser extends Ship{
     public Cruiser() {

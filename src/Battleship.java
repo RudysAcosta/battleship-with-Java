@@ -1,5 +1,12 @@
+import battleship.Board;
+import battleship.entity.AircraftCarrier;
+import battleship.exception.InvalidPositionException;
+import battleship.exception.InvalidShipSizeException;
+import battleship.validate.ShipPlacementValidator;
+
 import java.util.Arrays;
 import java.util.List;
+
 
 public class Battleship {
         private final UserInput inputHandler;
@@ -17,8 +24,15 @@ public class Battleship {
        }
 
        private void coordinatesAircraft() {
-            String[] coordinates = inputHandler.getCoordinates("Enter the coordinates of the Aircraft Carrier (5 cells):");
-            System.out.println(Arrays.toString(coordinates));
+            String[] positions = inputHandler.getCoordinates("Enter the coordinates of the Aircraft Carrier (5 cells):");
+
+            try {
+                ShipPlacementValidator shipValidator = new ShipPlacementValidator(new AircraftCarrier(), board);
+                shipValidator.isValidPlacement(positions[0], positions[1]);
+            } catch (InvalidPositionException | InvalidShipSizeException e) {
+                System.out.println(e.getMessage());
+            }
+
        }
 
         private void placeShip() {

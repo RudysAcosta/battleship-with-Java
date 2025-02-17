@@ -1,10 +1,17 @@
+package battleship;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class Board {
 
     private final int dimantion = 10;
-
     private char[][] board;
+    private final Set<String> occupiedCells;
 
     public Board() {
+        this.occupiedCells = new HashSet<>();
+
         board = new char[dimantion][dimantion];
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[i].length; j++) {
