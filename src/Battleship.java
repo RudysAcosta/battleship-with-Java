@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class Battleship {
@@ -11,8 +12,14 @@ public class Battleship {
 
         public void startGame() {
             board.printBoard();
-            placeShip();
-        }
+//            placeShip();
+            coordinatesAircraft();
+       }
+
+       private void coordinatesAircraft() {
+            String[] coordinates = inputHandler.getCoordinates("Enter the coordinates of the Aircraft Carrier (5 cells):");
+            System.out.println(Arrays.toString(coordinates));
+       }
 
         private void placeShip() {
             String[] inputCoordinates = inputHandler.getCoordinates("Enter the coordinates of the ship:");
