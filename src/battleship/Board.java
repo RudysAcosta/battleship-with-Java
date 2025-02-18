@@ -59,7 +59,7 @@ public class Board {
         return true;
     }
 
-    private void getNeighbors(String pos) {
+    private Set<String> getNeighbors(String pos) {
         Set<String> neighbors = new HashSet<>();
         int[] position = ShipPlacementValidator.parsePosition(pos);
         int x = position[0];
@@ -81,8 +81,7 @@ public class Board {
             }
         }
 
-        System.out.println("Vecinos de " + pos + ": " + neighbors);
-
+        return neighbors;
     }
 
     private boolean isWithinBounds(int x, int y) {
