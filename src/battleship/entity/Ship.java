@@ -29,11 +29,4 @@ public abstract class Ship {
         return prompt;
     }
 
-    public List<int[]> getPositions() {
-        return positions;
-    }
-
-    public void addPosition(int x, int y) {
-        positions.add(new int[]{x, y});
-    }
 }

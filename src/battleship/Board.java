@@ -79,7 +79,7 @@ public class Board {
             int newY = y + dir[1];
 
             if (isWithinBounds(newX, newY)) {
-                neighbors.add(ShipPlacementValidator.formatPosition(newX, newY));
+                neighbors.add(ShipPlacementValidator.formatPosition(newY, newX));
             }
         }
 
@@ -88,13 +88,17 @@ public class Board {
 
     public void add(Set<String> positions) {
         occupiedCells.addAll(positions);
+
+        for (String position: positions) {
+            int[] pos = ShipPlacementValidator.parsePosition(position);
+            int x = pos[1] - 1;
+            int y = pos[0] - 1;
+
+            board[x][y] = 'O';
+        }
     }
 
     private boolean isWithinBounds(int x, int y) {
         return x >= 1 && x <= dimantion && y >= 1 && y <= dimantion;
-    }
-
-    public void testBoard() {
-        System.out.println(occupiedCells);
     }
 }

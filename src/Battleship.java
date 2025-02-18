@@ -7,8 +7,6 @@ import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;
 import battleship.validate.ShipPlacementValidator;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 
@@ -25,6 +23,11 @@ public class Battleship {
             board.printBoard();
 
             placeShip(new AircraftCarrier());
+            board.printBoard();
+
+            placeShip(new battleship.entity.Battleship());
+            board.printBoard();
+
        }
 
     private void placeShip(Ship ship) {
@@ -53,7 +56,6 @@ public class Battleship {
                 }
 
                 board.add(positions);
-                board.testBoard();
                 placedSuccessfully = true;
 
             } catch (InvalidPositionException | InvalidShipSizeException e) {
