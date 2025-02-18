@@ -51,12 +51,14 @@ public class Board {
     }
 
     public boolean isClose(Set<String> positions) {
-
         for(String position : positions) {
-            getNeighbors(position);
+            Set<String> neighbors = getNeighbors(position);
+            for (String neighbor: neighbors) {
+                if (occupiedCells.contains(neighbor)) return true;
+            }
         }
 
-        return true;
+        return false;
     }
 
     private Set<String> getNeighbors(String pos) {
@@ -84,7 +86,15 @@ public class Board {
         return neighbors;
     }
 
+    public void add(Set<String> positions) {
+        occupiedCells.addAll(positions);
+    }
+
     private boolean isWithinBounds(int x, int y) {
         return x >= 1 && x <= dimantion && y >= 1 && y <= dimantion;
+    }
+
+    public void testBoard() {
+        System.out.println(occupiedCells);
     }
 }
