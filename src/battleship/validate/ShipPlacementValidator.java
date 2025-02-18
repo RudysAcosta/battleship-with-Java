@@ -5,7 +5,8 @@ import battleship.entity.Ship;
 import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ShipPlacementValidator {
     private Ship ship;
@@ -16,7 +17,7 @@ public class ShipPlacementValidator {
         this.board = board;
     }
 
-    private int[] parsePosition(String pos) {
+    public static int[] parsePosition(String pos) {
         String[] position = new String[2];
 
         position[0] = pos.substring(0, 1);
@@ -28,11 +29,7 @@ public class ShipPlacementValidator {
         return new int[]{x, y};
     }
 
-    public void isValidPlacement(String start, String end) throws InvalidShipSizeException, InvalidPositionException {
-
-        int[] posStart = parsePosition(start);
-        int[] posEnd = parsePosition(end);
-
+    public boolean isValidPlacement(int[] posStart, int[] posEnd) throws InvalidShipSizeException, InvalidPositionException {
         int size = calculateSize(posStart, posEnd);
 
         if (size == -1) {
@@ -43,16 +40,25 @@ public class ShipPlacementValidator {
             throw new InvalidShipSizeException(ship.getName());
         }
 
-        System.out.println(size);
-
+        return true;
     }
 
-    public void isOccupied() {
-
+    public Set<String> getPositions(int[] start, int[] end) {
+        Set<String> positions = new HashSet<>();
+        if (start[0] == end[0]) { // Horizontal
+            for (int i = Math.min(start[1], end[1]); i <= Math.max(start[1], end[1]); i++) {
+                positions.add(getLetter(i) +""+ start[0]);
+            }
+        } else if (start[1] == end[1]) { // Vertical
+            for (int i = Math.min(start[0], end[0]); i <= Math.max(start[0], end[0]); i++) {
+                positions.add(getLetter(start[1])  + "" + i);
+            }
+        }
+        return positions;
     }
 
-    private void getPositions() {
-
+    private char getLetter(int pos) {
+        return (char)(pos - 1 + 'A');
     }
 
     private int calculateSize(int[] start, int[] end) {
