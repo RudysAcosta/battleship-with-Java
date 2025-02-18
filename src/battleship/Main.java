@@ -2,7 +2,7 @@ package battleship;
 
 public class Main {
     public static void main(String[] args) {
-        Battleship game = new Battleship();
+        Game game = new Game();
         game.startGame();
     }
 }

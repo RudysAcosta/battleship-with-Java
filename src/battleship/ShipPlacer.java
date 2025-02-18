@@ -1,7 +1,6 @@
 package battleship;
 
-import battleship.entity.*;
-
+import battleship.entity.Board;
 import battleship.entity.Ship;
 import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;
@@ -9,37 +8,16 @@ import battleship.validate.ShipPlacementValidator;
 
 import java.util.Set;
 
+public class ShipPlacer {
+    private final Board board;
+    private final UserInput inputHandler;
 
-public class Battleship {
-        private final UserInput inputHandler;
-        private final Board board;
+    public ShipPlacer(Board board, UserInput inputHandler) {
+        this.board = board;
+        this.inputHandler = inputHandler;
+    }
 
-        public Battleship() {
-            this.inputHandler = new UserInput();
-            this.board = new Board();
-        }
-
-        public void startGame() {
-            board.printBoard();
-
-            placeShip(new AircraftCarrier());
-            board.printBoard();
-
-            placeShip(new battleship.entity.Battleship());
-            board.printBoard();
-
-            placeShip(new Submarine());
-            board.printBoard();
-
-            placeShip(new Cruiser());
-            board.printBoard();
-
-            placeShip(new Destroyer());
-            board.printBoard();
-
-       }
-
-    private void placeShip(Ship ship) {
+    public void placeShip(Ship ship) {
         ShipPlacementValidator shipValidator = new ShipPlacementValidator(ship, board);
         boolean placedSuccessfully = false;
 
@@ -74,6 +52,4 @@ public class Battleship {
             }
         }
     }
-
-
 }
