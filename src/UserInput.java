@@ -8,9 +8,7 @@ public class UserInput {
         this.scanner = new Scanner(System.in);
     }
 
-    public String[] getCoordinates(String prompt) {
-        System.out.println("\n" + prompt + "\n");
-
+    public String[] getCoordinates() {
 
         while (true) {
             String line = scanner.nextLine().trim();

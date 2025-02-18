@@ -1,8 +1,8 @@
 import battleship.Board;
 
-import battleship.entity.AircraftCarrier;
-import battleship.entity.Ship;
+import battleship.entity.*;
 
+import battleship.entity.Ship;
 import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;
 import battleship.validate.ShipPlacementValidator;
@@ -28,14 +28,25 @@ public class Battleship {
             placeShip(new battleship.entity.Battleship());
             board.printBoard();
 
+            placeShip(new Submarine());
+            board.printBoard();
+
+            placeShip(new Cruiser());
+            board.printBoard();
+
+            placeShip(new Destroyer());
+            board.printBoard();
+
        }
 
     private void placeShip(Ship ship) {
         ShipPlacementValidator shipValidator = new ShipPlacementValidator(ship, board);
         boolean placedSuccessfully = false;
 
+        System.out.println("\n" + ship.getPrompt() + "\n");
+
         while (!placedSuccessfully) {
-            String[] inputPositions = inputHandler.getCoordinates(ship.getPrompt());
+            String[] inputPositions = inputHandler.getCoordinates();
 
             try {
                 int[] posStart = ShipPlacementValidator.parsePosition(inputPositions[0]);
@@ -46,12 +57,12 @@ public class Battleship {
                 Set<String> positions = shipValidator.getPositions(posStart, posEnd);
 
                 if (board.isOccupied(positions)) {
-                    System.out.println("Error! You placed it on an occupied cell. Try again:");
+                    System.out.println("\nError! You placed it on an occupied cell. Try again:\n");
                     continue;
                 }
 
                 if (board.isClose(positions)) {
-                    System.out.println("Error! You placed it too close to another one. Try again:");
+                    System.out.println("\nError! You placed it too close to another one. Try again:\n");
                     continue;
                 }
 
@@ -59,7 +70,7 @@ public class Battleship {
                 placedSuccessfully = true;
 
             } catch (InvalidPositionException | InvalidShipSizeException e) {
-                System.out.println(e.getMessage());
+                System.out.println("\n" + e.getMessage() + "\n");
             }
         }
     }
