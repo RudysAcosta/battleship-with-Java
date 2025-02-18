@@ -1,6 +1,6 @@
 package battleship.validate;
 
-import battleship.Board;
+import battleship.entity.Board;
 import battleship.entity.Ship;
 import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;

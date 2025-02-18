@@ -1,4 +1,4 @@
-import battleship.Board;
+package battleship;
 
 import battleship.entity.*;
 

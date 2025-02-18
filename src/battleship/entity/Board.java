@@ -1,8 +1,7 @@
-package battleship;
+package battleship.entity;
 
 import battleship.validate.ShipPlacementValidator;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
