@@ -1,5 +1,8 @@
 package battleship;
 
+import battleship.validate.ShipPlacementValidator;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,5 +48,44 @@ public class Board {
         }
 
         return false;
+    }
+
+    public boolean isClose(Set<String> positions) {
+
+        for(String position : positions) {
+            getNeighbors(position);
+        }
+
+        return true;
+    }
+
+    private void getNeighbors(String pos) {
+        Set<String> neighbors = new HashSet<>();
+        int[] position = ShipPlacementValidator.parsePosition(pos);
+        int x = position[0];
+        int y = position[1];
+
+        int[][] directions = {
+                {1, 0},  {-1, 0},
+                {0, 1},  {0, -1},
+                {1, 1},  {-1, -1},
+                {1, -1}, {-1, 1}
+        };
+
+        for (int[] dir : directions) {
+            int newX = x + dir[0];
+            int newY = y + dir[1];
+
+            if (isWithinBounds(newX, newY)) {
+                neighbors.add(ShipPlacementValidator.formatPosition(newX, newY));
+            }
+        }
+
+        System.out.println("Vecinos de " + pos + ": " + neighbors);
+
+    }
+
+    private boolean isWithinBounds(int x, int y) {
+        return x >= 1 && x <= dimantion && y >= 1 && y <= dimantion;
     }
 }

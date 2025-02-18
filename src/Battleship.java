@@ -38,8 +38,10 @@ public class Battleship {
                 Set<String> positions = shipValidator.getPositions(posStart, posEnd);
 
                 if (board.isOccupied(positions)) {
-
+                    System.out.println("Error! You placed it too close to another one. Try again:");
                 };
+
+                board.isClose(positions);
 
             } catch (InvalidPositionException | InvalidShipSizeException e) {
                 System.out.println(e.getMessage());

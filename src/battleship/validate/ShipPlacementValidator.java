@@ -29,6 +29,10 @@ public class ShipPlacementValidator {
         return new int[]{x, y};
     }
 
+    public static String formatPosition(int x, int y) {
+        return (char)(x - 1 + 'A') + "" + y;
+    }
+
     public boolean isValidPlacement(int[] posStart, int[] posEnd) throws InvalidShipSizeException, InvalidPositionException {
         int size = calculateSize(posStart, posEnd);
 
@@ -70,4 +74,5 @@ public class ShipPlacementValidator {
 
         return -1; // The position is invalid
     }
+
 }
