@@ -16,14 +16,14 @@ public class Game {
     public void startGame() {
         board.printBoard();
 
-//        shipPlacer.placeShip(new AircraftCarrier());
-//        board.printBoard();
-//
-//        shipPlacer.placeShip(new Battleship());
-//        board.printBoard();
-//
-//        shipPlacer.placeShip(new Submarine());
-//        board.printBoard();
+        shipPlacer.placeShip(new AircraftCarrier());
+        board.printBoard();
+
+        shipPlacer.placeShip(new Battleship());
+        board.printBoard();
+
+        shipPlacer.placeShip(new Submarine());
+        board.printBoard();
 
         shipPlacer.placeShip(new Cruiser());
         board.printBoard();
