@@ -1,5 +1,8 @@
 import battleship.Board;
+
 import battleship.entity.AircraftCarrier;
+import battleship.entity.Ship;
+
 import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;
 import battleship.validate.ShipPlacementValidator;
@@ -20,16 +23,18 @@ public class Battleship {
 
         public void startGame() {
             board.printBoard();
-//            placeShip();
-            coordinatesAircraft();
+
+            placeShip(new AircraftCarrier());
        }
 
-       private void coordinatesAircraft() {
-            String[] inputPositions = inputHandler.getCoordinates("Enter the coordinates of the Aircraft Carrier (5 cells):");
+    private void placeShip(Ship ship) {
+        ShipPlacementValidator shipValidator = new ShipPlacementValidator(ship, board);
+        boolean placedSuccessfully = false;
+
+        while (!placedSuccessfully) {
+            String[] inputPositions = inputHandler.getCoordinates(ship.getPrompt());
 
             try {
-                ShipPlacementValidator shipValidator = new ShipPlacementValidator(new AircraftCarrier(), board);
-
                 int[] posStart = ShipPlacementValidator.parsePosition(inputPositions[0]);
                 int[] posEnd = ShipPlacementValidator.parsePosition(inputPositions[1]);
 
@@ -38,45 +43,24 @@ public class Battleship {
                 Set<String> positions = shipValidator.getPositions(posStart, posEnd);
 
                 if (board.isOccupied(positions)) {
-                    System.out.println("Error! You placed occupied to another one. Try again:");
-                };
+                    System.out.println("Error! You placed it on an occupied cell. Try again:");
+                    continue;
+                }
 
                 if (board.isClose(positions)) {
                     System.out.println("Error! You placed it too close to another one. Try again:");
+                    continue;
                 }
 
                 board.add(positions);
                 board.testBoard();
+                placedSuccessfully = true;
 
             } catch (InvalidPositionException | InvalidShipSizeException e) {
                 System.out.println(e.getMessage());
             }
-
-       }
-
-//        private void placeShip() {
-//            String[] inputCoordinates = inputHandler.getCoordinates("Enter the coordinates of the ship:");
-//
-//            if (!board.isValidCoordinate(inputCoordinates[0], inputCoordinates[1])) {
-//                System.out.println("Error!");
-//                return;
-//            }
-//
-//            int[] startCoordinate = board.normalizeCoordinate(inputCoordinates[0]);
-//            int[] endCoordinate = board.normalizeCoordinate(inputCoordinates[1]);
-//
-//            Ship ship = new Ship(startCoordinate, endCoordinate);
-//            printShipDetails(ship);
-//        }
-
-//        private void printShipDetails(Ship ship) {
-//            System.out.printf("Length: %d\n", ship.getLength());
-//            System.out.printf("Parts: ");
-//
-//            List<Coordinate> coordinates = ship.cells();
-//            for (Coordinate coordinate : coordinates) {
-//                System.out.printf("%c%d ", coordinate.rowToChar(), coordinate.getColumn());
-//            }
-//            System.out.println();
-//        }
+        }
     }
+
+
+}
