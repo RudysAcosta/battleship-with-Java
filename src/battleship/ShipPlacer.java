@@ -4,6 +4,7 @@ import battleship.entity.Board;
 import battleship.entity.Ship;
 import battleship.exception.InvalidPositionException;
 import battleship.exception.InvalidShipSizeException;
+import battleship.util.CoordinateUtil;
 import battleship.validate.ShipPlacementValidator;
 
 import java.util.Set;
@@ -27,8 +28,8 @@ public class ShipPlacer {
             String[] inputPositions = inputHandler.getCoordinates();
 
             try {
-                int[] posStart = ShipPlacementValidator.parsePosition(inputPositions[0]);
-                int[] posEnd = ShipPlacementValidator.parsePosition(inputPositions[1]);
+                int[] posStart = CoordinateUtil.parsePosition(inputPositions[0]);
+                int[] posEnd = CoordinateUtil.parsePosition(inputPositions[1]);
 
                 shipValidator.isValidPlacement(posStart, posEnd);
 

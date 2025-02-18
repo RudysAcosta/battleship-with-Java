@@ -17,22 +17,6 @@ public class ShipPlacementValidator {
         this.board = board;
     }
 
-    public static int[] parsePosition(String pos) {
-        String[] position = new String[2];
-
-        position[0] = pos.substring(0, 1);
-        position[1] = pos.substring(1);
-
-        int y = position[0].charAt(0) - 64;
-        int x = Integer.parseInt(position[1]);
-
-        return new int[]{x, y};
-    }
-
-    public static String formatPosition(int x, int y) {
-        return (char)(x - 1 + 'A') + "" + y;
-    }
-
     public boolean isValidPlacement(int[] posStart, int[] posEnd) throws InvalidShipSizeException, InvalidPositionException {
         int size = calculateSize(posStart, posEnd);
 

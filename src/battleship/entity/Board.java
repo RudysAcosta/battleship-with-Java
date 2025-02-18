@@ -1,5 +1,6 @@
 package battleship.entity;
 
+import battleship.util.CoordinateUtil;
 import battleship.validate.ShipPlacementValidator;
 
 import java.util.HashSet;
@@ -62,7 +63,7 @@ public class Board {
 
     private Set<String> getNeighbors(String pos) {
         Set<String> neighbors = new HashSet<>();
-        int[] position = ShipPlacementValidator.parsePosition(pos);
+        int[] position = CoordinateUtil.parsePosition(pos);
         int x = position[0];
         int y = position[1];
 
@@ -77,8 +78,8 @@ public class Board {
             int newX = x + dir[0];
             int newY = y + dir[1];
 
-            if (isWithinBounds(newX, newY)) {
-                neighbors.add(ShipPlacementValidator.formatPosition(newY, newX));
+            if (CoordinateUtil.isWithinBounds(newX, newY, dimantion)) {
+                neighbors.add(CoordinateUtil.formatPosition(newY, newX));
             }
         }
 
@@ -89,7 +90,7 @@ public class Board {
         occupiedCells.addAll(positions);
 
         for (String position: positions) {
-            int[] pos = ShipPlacementValidator.parsePosition(position);
+            int[] pos = CoordinateUtil.parsePosition(position);
             int x = pos[1] - 1;
             int y = pos[0] - 1;
 
@@ -97,7 +98,4 @@ public class Board {
         }
     }
 
-    private boolean isWithinBounds(int x, int y) {
-        return x >= 1 && x <= dimantion && y >= 1 && y <= dimantion;
-    }
 }
